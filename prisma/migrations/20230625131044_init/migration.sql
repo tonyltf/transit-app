@@ -1,7 +1,7 @@
 -- CreateTable
 CREATE TABLE "Account" (
     "id" UUID NOT NULL DEFAULT gen_random_uuid(),
-    "userId" TEXT NOT NULL,
+    "userId" UUID NOT NULL,
     "type" TEXT NOT NULL,
     "provider" TEXT NOT NULL,
     "providerAccountId" TEXT NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE "Account" (
 CREATE TABLE "Session" (
     "id" UUID NOT NULL DEFAULT gen_random_uuid(),
     "sessionToken" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
+    "userId" UUID NOT NULL,
     "expires" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Session_pkey" PRIMARY KEY ("id")
@@ -66,4 +66,3 @@ ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId"
 
 -- AddForeignKey
 ALTER TABLE "Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
